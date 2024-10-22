@@ -1,0 +1,31 @@
+/* body {
+    display: flex;
+} */
+
+.table {
+    display: flex;
+}
+
+#table1 {
+    margin-left: 20px;
+
+}
+
+th {
+    font-size: 14px;
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+td {
+    font-size: 14px;
+    border: 1px solid blue;
+}
+
+.percent {
+    white-space: nowrap;
+}
+
+.span {
+    border: 2px solid green;
+}
