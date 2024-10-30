@@ -1,75 +1,111 @@
-const url = "https://fapi.binance.com/fapi/v1/ticker/price";
-let lastPrices = {};
+const url1 = "https://fapi.binance.com/fapi/v1/ticker/24hr";
 
 setInterval(() => {
-    fetch(url)
+    fetch(url1)
         .then(res => res.json())
         .then(data => {
-            let table = document.querySelector('#table1');
+            let table = document.querySelector('#table');
+            let negativeCount = 0; // Variable to count negative numbers            
+            let upCount = 0; // Variable to count negative numbers            
+
             table.innerHTML = '';
 
-            // let btc = document.createElement('tr');
-            // let btcSymbol = document.createElement('th');
-            // let btcPrice = document.createElement('th');
-            // let btcPercent = document.createElement('th');
-            // let qq = data.filter(ww => ww.symbol === 'BTCUSDT');
-            // btcSymbol.textContent = qq[0].symbol;
-            // btcPrice.textContent = parseFloat(qq[0].price);
+            let btc = document.createElement('tr');   //first trHeader
+            let btcSymbol = document.createElement('th');
+            let btcPrice = document.createElement('th');
+            let btcPercent = document.createElement('th');
 
-            let trheader = document.createElement('tr');
-            let th1 = document.createElement('th');
-            let th2 = document.createElement('th');
-            let th3 = document.createElement('th');
-            let th4 = document.createElement('th');
+            let dataitem = data.filter(ww => ww.symbol === 'BTCUSDT');
+            btcSymbol.textContent = dataitem[0].symbol;
+            btcPrice.textContent = parseFloat(dataitem[0].lastPrice);
+            btcPercent.textContent = (parseFloat(dataitem[0].priceChangePercent)).toFixed(2);
 
-            th1.textContent = 'Symbol';
-            th2.textContent = 'Last Price';
-            th3.textContent = 'New Price';
-            th4.textContent = 'Price Change';
+            if (btcPercent.textContent > 0) {
+                btcPercent.style.background = 'rgb(120, 247, 139)';
+            } else {
+                btcPercent.style.background = 'rgb(253, 64, 64)';
+                btcPercent.style.color = 'white';
+            }
 
-            // btc.appendChild(btcSymbol)
-            // btc.appendChild(btcPrice)
-            // btc.appendChild(btcPercent)
-            trheader.appendChild(th1);
-            trheader.appendChild(th2);
-            trheader.appendChild(th3);
-            trheader.appendChild(th4);
-            // table.appendChild(btc);
-            table.appendChild(trheader);
+            let trHeader = document.createElement('tr'); //second trHeader
+            let thSymbol = document.createElement('th');
+            thSymbol.classList.add('thSymbol');
+            let thPrice = document.createElement('th');
+            thPrice.classList.add('price');
+            let thPercent = document.createElement('th');
+            thPercent.classList.add('percent');
+            thSymbol.textContent = 'Symbol';
+            thPrice.textContent = 'Price';
+
+            btc.appendChild(btcSymbol)
+            btc.appendChild(btcPrice)
+            btc.appendChild(btcPercent)
+            trHeader.appendChild(thSymbol);
+            trHeader.appendChild(thPrice);
+            trHeader.appendChild(thPercent);
+            table.appendChild(btc);
+            table.appendChild(trHeader);
+
+            data.sort((a, b) => {                      // sort to min persent
+                if (+a.priceChangePercent < +b.priceChangePercent) return -1;
+                return 0;
+            });
 
             data.forEach(item => {
-                let tr = document.createElement('tr');
-                let symbol = document.createElement('td');
-                symbol.textContent = item.symbol;
+                if (item.symbol.endsWith('USDT')) {  // sort by usd ticket
+                    let tr = document.createElement('tr');
+                    let symbol = item.symbol;
+                    let price = parseFloat(item.lastPrice);
+                    let percent = parseFloat(item.priceChangePercent);
 
-                let lastPrice = lastPrices[item.symbol] || 0;
-                let newPrice = parseFloat(item.price);
-                let priceChange = ((newPrice - lastPrice) / lastPrice) * 100 || 0;
+                    let tdSymbol = document.createElement('td');
+                    let tdPrice = document.createElement('td');
+                    let tdPercent = document.createElement('td');
+                    tdSymbol.textContent = symbol;
+                    tdPrice.textContent = price.toFixed(4);
+                    tdPercent.textContent = percent.toFixed(2);
 
-                let lastprices = document.createElement('td');
-                lastprices.textContent = lastPrice;
+                    if (percent > 0) {  // sort by color
+                        tdPercent.style.background = 'rgb(120, 247, 139)';
+                        upCount++;
+                    } else if (percent < 0) {
+                        tdPercent.style.background = 'rgb(253, 64, 64)';
+                        tdPercent.style.color = 'white';
+                        negativeCount++; // Increment count for negative numbers
+                    }
 
-                let newprices = document.createElement('td');
-                newprices.textContent = newPrice;
-
-                let percent = document.createElement('td');
-                percent.textContent = priceChange.toFixed(2) + '%';
-                if (priceChange > 0) {
-                    percent.style.background = 'rgb(120, 247, 139)';
-                } else if (priceChange < 0) {
-                    percent.style.background = 'rgb(253, 64, 64)';
+                    tr.appendChild(tdSymbol);
+                    tr.appendChild(tdPrice);
+                    tr.appendChild(tdPercent);
+                    table.appendChild(tr);
                 }
-
-                lastPrices[item.symbol] = newPrice;
-
-                tr.appendChild(symbol);
-                tr.appendChild(lastprices);
-                tr.appendChild(newprices);
-                tr.appendChild(percent);
-                table.appendChild(tr);
             });
+
+            let percentTicket = (((negativeCount + upCount) / 1000) * negativeCount);
+            let spanElement = document.createElement('span');
+            spanElement.style.color = 'red';
+            spanElement.textContent = percentTicket.toFixed(0) + '%';
+            thPercent.innerHTML = '%' + ' ' + '24hr' + ' ' + '-' + ' ' + spanElement.outerHTML;
+
+            document.querySelector('.thSymbol').addEventListener('click', () => {
+                let table = document.querySelector('#table');
+                let rows = Array.from(table.querySelectorAll('tr'));
+
+                rows.sort((a, b) => {
+                    let tdA = a.querySelector('td');
+                    let tdB = b.querySelector('td');
+                    let symbolA = tdA ? tdA.textContent : '';
+                    let symbolB = tdB ? tdB.textContent : '';
+                    return symbolA.localeCompare(symbolB);
+                });
+
+                table.innerHTML = '';
+                table.appendChild(trHeader); // Re-add the header row
+                rows.forEach(row => table.appendChild(row));
+            });
+
         })
         .catch(err => {
             console.log(err);
         });
-}, 20000);
+}, 10000);
