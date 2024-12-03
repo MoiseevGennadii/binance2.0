@@ -1,22 +1,79 @@
+/* aclonica-regular - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Aclonica';
+    font-style: normal;
+    font-weight: 700;
+    src: url('./fonts/aclonica-v23-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 
+/* alumni-sans-inline-one-regular - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Alumni Sans Inline One';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/alumni-sans-inline-one-v5-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(88, 70, 105);
+}
+
+.header {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    perspective: 500px;
+}
+
+.header span {
+    font-family: "Aclonica";
+    font-size: 1.5rem;
+    padding: 0.2rem;
+}
+
+.header span:hover {
+    transform:  rotateY(360deg);
+    transform-style: preserve-3d;
+    transition: 5000ms;
+}
 
 .table {
+    height: 90vh;
+    overflow-x: hidden;
     display: flex;
+    justify-content: center;
+}
+
+#table {
+    margin: 0;
+    padding: 0;
 }
 
 #table1 {
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }
 
 th {
     font-size: 14px;
     border: 1px solid red;
     cursor: pointer;
+    color: white;
+    /* position: sticky; */
 }
 
 td {
     font-size: 14px;
-    border: 1px solid blue;
+    border: 1px solid rgb(149, 255, 0);
+    color: rgb(255, 255, 255);
 }
 
 .percent {
