@@ -67,6 +67,7 @@ setInterval(() => {
 
                     if (percent > 0) {  // sort by color
                         tdPercent.style.background = 'rgb(120, 247, 139)';
+                        tdPercent.style.color = "black";
                         upCount++;
                     } else if (percent < 0) {
                         tdPercent.style.background = 'rgb(253, 64, 64)';
@@ -83,7 +84,7 @@ setInterval(() => {
 
             let percentTicket = (((negativeCount + upCount) / 1000) * negativeCount);
             let spanElement = document.createElement('span');
-            spanElement.style.color = 'red';
+            spanElement.style.color = '#f45e5e';
             spanElement.textContent = percentTicket.toFixed(0) + '%';
             thPercent.innerHTML = '%' + ' ' + '24hr' + ' ' + '-' + ' ' + spanElement.outerHTML;
 
@@ -104,8 +105,9 @@ setInterval(() => {
                 rows.forEach(row => table.appendChild(row));
             });
 
+            
         })
         .catch(err => {
             console.log(err);
         });
-}, 10000);
+}, 5000);
