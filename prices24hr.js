@@ -4,7 +4,7 @@ setInterval(() => {
     fetch(url1)
         .then(res => res.json())
         .then(data => {
-            let table = document.querySelector('#table');
+            let table = document.querySelector('#table24');
             let negativeCount = 0; // Variable to count negative numbers            
             let upCount = 0; // Variable to count negative numbers            
 

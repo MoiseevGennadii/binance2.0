@@ -1,11 +1,12 @@
-// const url2 = "https://fapi.binance.com/fapi/v1/ticker/price";
-// let lastPrices = {};
+// function updateData() {
+//     const url1 = "https://fapi.binance.com/fapi/v1/ticker/price";
+//     let lastPrices = {};
 
-// setInterval(() => {
-//     fetch(url2)
+
+//     fetch(url1)
 //         .then(res => res.json())
 //         .then(data => {
-//             let table = document.querySelector('#table1');
+//             let table = document.querySelector('#table15');
 //             table.innerHTML = '';
 
 //             let trheader = document.createElement('tr');
@@ -62,18 +63,36 @@
 //         .catch(err => {
 //             console.log(err);
 //         });
-// }, 5000);
+// }
+// updateData();
 
 
+// function scheduleRequest() {
+//     const currentTime = new Date();
+//     const utc3Time = new Date(currentTime.getTime());
 
-const url1 = "https://fapi.binance.com/fapi/v1/ticker/price";
+//     const minutes = utc3Time.getMinutes();
+//     const seconds = utc3Time.getSeconds();
+//     const delay = (15 - (minutes % 15)) * 60 * 1000 - seconds * 1000;
+
+//     setTimeout(() => {
+//         setInterval(updateData, 15 * 60 * 15000);
+//     }, delay);
+// }
+
+// scheduleRequest();
+
+
 let lastPrices = {};
 
-function fetchData() {
+function updateData() {
+    const url1 = "https://fapi.binance.com/fapi/v1/ticker/price";
+    lastPrices;
+
     fetch(url1)
         .then(res => res.json())
         .then(data => {
-            let table = document.querySelector('#table1');
+            let table = document.querySelector('#table15');
             table.innerHTML = '';
 
             let trheader = document.createElement('tr');
@@ -132,6 +151,9 @@ function fetchData() {
         });
 }
 
+updateData();
+setInterval(updateData, 15 * 60 * 1000);
+
 function scheduleRequest() {
     const currentTime = new Date();
     const utc3Time = new Date(currentTime.getTime());
@@ -141,8 +163,8 @@ function scheduleRequest() {
     const delay = (15 - (minutes % 15)) * 60 * 1000 - seconds * 1000;
 
     setTimeout(() => {
-        fetchData();
-        setInterval(fetchData, 15 * 60 * 15000);
+        updateData();
+        setInterval(updateData, 15 * 60 * 1000);
     }, delay);
 }
 
