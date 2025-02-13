@@ -96,4 +96,4 @@ function updateData() {
 }
 
 updateData();
-setInterval(updateData, 5000);
+setInterval(updateData, 60000);
