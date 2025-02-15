@@ -40,7 +40,7 @@ function updateData() {
             table.appendChild(btc);
             table.appendChild(trHeader);
             data.sort((a, b) => {                  // sort to min persent
-                if (+a.priceChangePercent < +b.priceChangePercent) return -1;
+                if (+a.priceChangePercent > +b.priceChangePercent) return -1;
                 return 0;
             });
             data.forEach(item => {
