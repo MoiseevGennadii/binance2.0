@@ -63,6 +63,8 @@ body {
     margin-bottom: 1rem;
     border: 2px solid red;
     padding: 5px;
+    border-radius: 1%;
+
 }
 
 #table15 {
@@ -72,11 +74,13 @@ body {
     margin-bottom: 1rem;
     border: 2px solid red;
     padding: 5px;
+    border-radius: 1%;
 }
 
 #table24::-webkit-scrollbar {
     width: 7px;
     background-color: #f9f9fd;
+    border-radius: 5px;
   }
 
 #table24::-webkit-scrollbar-thumb {
@@ -87,6 +91,7 @@ body {
 #table15::-webkit-scrollbar {
     width: 7px;
     background-color: #f9f9fd;
+    border-radius: 5px;
   }
 
 #table15::-webkit-scrollbar-thumb {
@@ -137,9 +142,7 @@ td {
 }
 
 @media only screen and (max-width: 600px) {
-    body {
-        font-size: 30px; /* Настройте размер шрифта по вашему усмотрению */
-    }
+    
     .header span {
         font-size:1.5rem; /* Настройте размер шрифта для заголовка */
     }

@@ -68,11 +68,11 @@ function updateData() {
                     tr.appendChild(tdPrice);
                     tr.appendChild(tdPercent);
                     table.appendChild(tr);
-                }
+                }                     
             });
-            let percentTicket = (((negativeCount + upCount) / 1000) * negativeCount);
+            let percentTicket = ((upCount * 100) / (negativeCount + upCount));
             let spanElement = document.createElement('span');
-            spanElement.style.color = '#f45e5e';
+            spanElement.style.color = 'rgb(120, 247, 139)';
             spanElement.textContent = percentTicket.toFixed(0) + '%';
             thPercent.innerHTML = '%' + ' ' + '24hr' + ' ' + '-' + ' ' + spanElement.outerHTML;
             document.querySelector('.thSymbol').addEventListener('click', () => {
