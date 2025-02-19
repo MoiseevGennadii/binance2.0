@@ -1,5 +1,3 @@
-
-
 let lastPrices = {};
 
 function updateData() {
@@ -21,16 +19,14 @@ function updateData() {
             th1.textContent = 'Symbol';
             th2.textContent = 'Last Price';
             th3.textContent = 'New Price';
-            th4.textContent = 'Price Change' + ' ' + '15min';
-
+            th4.innerHTML = 'Price Change<br>15min';
             trheader.appendChild(th1);
             trheader.appendChild(th2);
             trheader.appendChild(th3);
             trheader.appendChild(th4);
             table.appendChild(trheader);
 
-            data.forEach(item => {
-
+            let rows = data.map(item => {
                 let tr = document.createElement('tr');
                 let symbol = document.createElement('td');
                 symbol.textContent = item.symbol;
@@ -60,7 +56,14 @@ function updateData() {
                 tr.appendChild(lastprices);
                 tr.appendChild(newprices);
                 tr.appendChild(percent);
-                table.appendChild(tr);
+
+                return { tr, priceChange };
+            });
+
+            rows.sort((a, b) => +a.priceChange - +b.priceChange);
+
+            rows.forEach(row => {
+                table.appendChild(row.tr);
             });
         })
         .catch(err => {
