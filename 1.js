@@ -39,7 +39,7 @@ function updateData() {
             trHeader.appendChild(thPercent);
             table.appendChild(btc);
             table.appendChild(trHeader);
-            data.sort((a, b) => {                  // sort to min persent
+            data.sort((a, b) => {                  // sort to max persent
                 if (+a.priceChangePercent > +b.priceChangePercent) return -1;
                 return 0;
             });
