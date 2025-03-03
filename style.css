@@ -20,11 +20,20 @@
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+/* kablammo-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Kablammo';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/kablammo-v1-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+
 
 body {
     margin: 0;
     padding: 0;
-    background-color: rgb(88, 70, 105);
+    background-color: #584669;
 }
 
 .header {
@@ -49,8 +58,6 @@ body {
 }
 
 .table {
-    /* height: 90vh; */
-    /* overflow-x: hidden; */
     display: flex ;
     justify-content: center;
     flex-wrap: wrap;
@@ -107,10 +114,17 @@ th {
     /* position: sticky; */
 }
 
-#table24 tr:first-child {
+#table15 tr:first-child  {  /*fixed header table */
     position: sticky;
+    top: 0;
+    background-color: #584669;
 }
 
+#table24 > tr:nth-child(2) {  /*fixed header table */
+    position: sticky;
+    top: 0;
+    background-color: #584669;
+}
 
 td {
     font-size: 14px;
@@ -126,12 +140,6 @@ td {
     border: 2px solid green;
 }
 
-#hr24 th {
-    border: 1px solid purple;
-    width: 20px;
-    height: 20px;
-}
-
 .time {
     align-items: center;
     justify-content: center;
@@ -139,6 +147,8 @@ td {
     margin-bottom: 0.5rem;
     text-decoration: none;
     color: yellow;
+    font-family:"Kablammo" ;
+    letter-spacing: 0.1rem;
 }
 
 @media only screen and (max-width: 600px) {
