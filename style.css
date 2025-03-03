@@ -36,12 +36,14 @@ body {
     background-color: #584669;
 }
 
+            /* -------HEADER ------*/
+
 .header {
     align-items: center;
     justify-content: center;
     display: flex;
     perspective: 500px;
-    margin-bottom: 0.5rem;
+    padding: 1rem;
 }
 
 .header span {
@@ -140,11 +142,26 @@ td {
     border: 2px solid green;
 }
 
-.time {
-    align-items: center;
-    justify-content: center;
+
+/* FOOTER */
+
+.foot {
     display: flex;
     margin-bottom: 0.5rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.time {
+    text-decoration: none;
+    color: yellow;
+    font-family:"Kablammo";
+    letter-spacing: 0.1rem;
+    margin-right: 0.5rem;
+}
+
+.contact {
     text-decoration: none;
     color: yellow;
     font-family:"Kablammo" ;
